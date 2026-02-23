@@ -100,7 +100,7 @@ This project requires CUDA runtime libraries. They can be sourced from:
 
 > 💡 **Tip:** If you use ComfyUI, you likely already have PyTorch. In that case, you probably **don't need to install the CUDA Toolkit separately** — the necessary libraries will be found automatically.
 
-> ⚠️ After installing **CUDA Toolkit**, restart your computer.
+> 💡 **Tip:** After installing **CUDA Toolkit**, restart your computer.
 
 # What's next:
 1. Use **ComfyUI Manager** and find **ComfyUI_Simple_Qwen3-VL-gguf** or copy this project using git to the folder `path_to_comfyui\ComfyUI\custom_nodes`
@@ -706,7 +706,7 @@ https://github.com/KLL535/ComfyUI_Simple_Qwen3-VL-gguf/issues/15
 
 Maybe it will be useful to someone.
 
-[!] Tested only on Windows. Tested only on RTX5080. Tested only on Python 3.13.2 and Pytorch 2.10.0.dev20251121+cu130
+[!] Tested only on Windows. Tested only on RTX5080/RTX2060. Tested only on Python 3.13
 
 # Dependencies & Thanks:
 - https://github.com/JamePeng/llama-cpp-python
