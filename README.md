@@ -92,7 +92,13 @@ python -m pip install temp\llama_cpp_python-0.3.18-cp313-cp313-win_amd64.whl
 
 </details>
 
-This project requires the **CUDA Toolkit** to be installed. Try installing: https://developer.nvidia.com/cuda-downloads
+### CUDA Support
+
+This project requires CUDA runtime libraries. They can be sourced from:
+- The **CUDA Toolkit**: https://developer.nvidia.com/cuda-downloads *(recommended for compiling from source)*
+- **OR** an existing **PyTorch** installation *(sufficient for running pre-built extensions)*
+
+> 💡 **Tip:** If you use ComfyUI, you likely already have PyTorch. In that case, you probably **don't need to install the CUDA Toolkit separately** — the necessary libraries will be found automatically.
 
 # What's next:
 1. Use **ComfyUI Manager** and find **ComfyUI_Simple_Qwen3-VL-gguf** or copy this project using git to the folder `path_to_comfyui\ComfyUI\custom_nodes`
