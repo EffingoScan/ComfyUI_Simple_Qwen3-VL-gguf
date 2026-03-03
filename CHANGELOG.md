@@ -1,4 +1,6 @@
 # nightly
+# V3.2
+- add Qwen3.5
 # V3.1
 - adding paths to torch to search for libraries
 # V3.0
