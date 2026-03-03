@@ -305,7 +305,58 @@ Allows select a user prompt from templates:
 
 
 # Models (tested):
-1. Qwen3VL:
+
+1. Qwen3.5 (Only for Simple Qwen-VL Vision Language Model node)
+   
+- https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-2B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-9B-GGUF
+  
+For example:
+`Qwen3.5-9B-Q4_K_M.gguf` + `mmproj-BF16.gguf`
+
+<details>
+
+<summary>json</summary>
+
+Write your paths.
+
+```json
+        "Qwen3.5-9B-Q4_K_M": {
+            "model_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\Qwen3.5-9B-Q4_K_M.gguf",
+            "mmproj_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\mmproj-BF16.gguf",
+            "output_max_tokens": 2048,
+            "image_max_tokens": 4096,
+            "ctx": 8192,
+            "n_batch": 8192,
+            "gpu_layers": -1,
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "min_p": 0.05,
+            "repeat_penalty": 1.0,
+            "present_penalty": 1.1,
+            "top_k": 20,
+            "pool_size": 4194304,
+            "chat_handler": "qwen35",
+            "enable_thinking": false,
+            "script": "qwen3vl_run.py"
+        },
+```
+
+For Qwen3.5 it is necessary to specify the handler `"chat_handler": "qwen35"`,
+
+And a new option appeared `enable_thinking": false`, - If you want the model to think (this may give a better result), write true, but this will take more time and require more context, plus the `</think>` section will have to be cut off later.
+
+You can also override stop tokens if needed: `"stop": ["<|im_end|>", "<|im_start|>"]`
+
+Other parameters should be selected based on recommendations, based on the task, or empirically, as you prefer.
+
+</details>
+
+---
+
+2. Qwen3VL (Old but pretty good model):
 - https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct-GGUF/tree/main
 For example:
 `Qwen3VL-8B-Instruct-Q8_0.gguf` + `mmproj-Qwen3VL-8B-Instruct-F16.gguf`
@@ -333,49 +384,6 @@ Write your paths
             "script": "qwen3vl_run.py"
         },
 ```
-
-</details>
-
----
-
-2. Qwen3.5 (Only for Simple Qwen-VL Vision Language Model node)
-   
-- https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF
-- https://huggingface.co/unsloth/Qwen3.5-2B-GGUF
-- https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
-- https://huggingface.co/unsloth/Qwen3.5-9B-GGUF
-  
-For example:
-`Qwen3.5-9B-Q4_K_M.gguf` + `mmproj-BF16.gguf`
-
-<details>
-
-<summary>json</summary>
-
-Write your paths.
-
-```json
-        "Qwen3.5-9B-Q4_K_M": {
-            "model_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\Qwen3.5-9B-Q4_K_M.gguf",
-            "mmproj_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\mmproj-BF16.gguf",
-            "output_max_tokens": 2048,
-            "image_max_tokens": 4096,
-            "ctx": 8192,
-            "n_batch": 8192,
-            "gpu_layers": -1,
-            "temperature": 0.7,
-            "top_p": 0.8,
-            "repeat_penalty": 1.1,
-            "top_k": 40,
-            "pool_size": 4194304,
-            "chat_handler": "qwen35",
-            "enable_thinking": false,
-            "script": "qwen3vl_run.py"
-        },
-```
-
-And a new option appeared enable_thinking": false, - If you want the model to think (this may give a better result), write true, but this will take more time and require more context, plus the </think> section will have to be cut off later.
-You can also override stop tokens if needed: `"stop": ["<|im_end|>", "<|im_start|>"]`
 
 </details>
 
