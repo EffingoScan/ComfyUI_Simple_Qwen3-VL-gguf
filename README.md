@@ -305,7 +305,7 @@ Allows select a user prompt from templates:
 
 
 # Models (tested):
-1. Regular Qwen:
+1. Qwen3VL:
 - https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct-GGUF/tree/main
 For example:
 `Qwen3VL-8B-Instruct-Q8_0.gguf` + `mmproj-Qwen3VL-8B-Instruct-F16.gguf`
@@ -337,7 +337,50 @@ Write your paths
 </details>
 
 ---
-2. Uncensored Qwen (but the model isn't trained on NSFW and doesn't understand it well):
+
+2. Qwen3.5 (Only for Simple Qwen-VL Vision Language Model node)
+   
+- https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-2B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-4B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-9B-GGUF
+  
+For example:
+`Qwen3.5-9B-Q4_K_M.gguf` + `mmproj-BF16.gguf`
+
+<details>
+
+<summary>json</summary>
+
+Write your paths.
+
+```json
+        "Qwen3.5-9B-Q4_K_M": {
+            "model_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\Qwen3.5-9B-Q4_K_M.gguf",
+            "mmproj_path": "H:\\LLM2\\Qwen3.5-9B-Q4_K_M\\mmproj-BF16.gguf",
+            "output_max_tokens": 2048,
+            "image_max_tokens": 4096,
+            "ctx": 8192,
+            "n_batch": 8192,
+            "gpu_layers": -1,
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "repeat_penalty": 1.1,
+            "top_k": 40,
+            "pool_size": 4194304,
+            "chat_handler": "qwen35",
+            "enable_thinking": false,
+            "script": "qwen3vl_run.py"
+        },
+```
+
+And a new option appeared enable_thinking": false, - If you want the model to think (this may give a better result), write true, but this will take more time and require more context, plus the </think> section will have to be cut off later.
+You can also override stop tokens if needed: `"stop": ["<|im_end|>", "<|im_start|>"]`
+
+</details>
+
+---
+3. Uncensored Qwen (but the model isn't trained on NSFW and doesn't understand it well):
 - https://huggingface.co/mradermacher/Qwen3-VL-8B-Instruct-abliterated-v2.0-GGUF
 For example:
 `Qwen3-VL-8B-Instruct-abliterated-v2.0.Q8_0.gguf` + `Qwen3-VL-8B-Instruct-abliterated-v2.0.mmproj-Q8_0.gguf`
@@ -369,7 +412,7 @@ Write your paths
 </details>
 
 ---
-3. Joecaption_beta (NSFW):
+4. Joecaption_beta (NSFW):
 - https://huggingface.co/concedo/llama-joycaption-beta-one-hf-llava-mmproj-gguf/tree/main
 For example:
 `llama-joycaption-beta-one-hf-llava-q8_0.gguf` + `llama-joycaption-beta-one-llava-mmproj-model-f16.gguf`
@@ -401,7 +444,7 @@ Write your paths
 </details>
 
 ---
-4. Qwen3-VL-30B
+5. Qwen3-VL-30B
 - https://huggingface.co/unsloth/Qwen3-VL-30B-A3B-Instruct-GGUF/tree/main
 For example:
 `Qwen3-VL-30B-A3B-Instruct-Q4_K_S.gguf` + `mmproj-BF16.gguf`
@@ -438,7 +481,7 @@ Write your paths
 
 ---
 
-5. Ministral-3-14B 
+6. Ministral-3-14B 
 - https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512-GGUF/tree/main
 For example:
 `Ministral-3-14B-Instruct-2512-Q4_K_M.gguf` + `Ministral-3-14B-Instruct-2512-BF16-mmproj.gguf`
@@ -470,7 +513,7 @@ Write your paths
 </details>
 
 ---
-6. Qwen3-30B-A3B-Instruct-2507-Q4_K_S (**not vision**)
+7. Qwen3-30B-A3B-Instruct-2507-Q4_K_S (**not vision**)
 - https://huggingface.co/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF/tree/main
 For example: `Qwen3-30B-A3B-Instruct-2507-Q4_K_S.gguf`
 
@@ -502,7 +545,7 @@ Write your paths. The `mmproj` line must be empty. In this mode images are ignor
 
 ---
 
-7. Mistral-Nemo-Instruct-2407-Q8_0 (**not vision**)
+8. Mistral-Nemo-Instruct-2407-Q8_0 (**not vision**)
 - https://huggingface.co/bartowski/Mistral-Nemo-Instruct-2407-GGUF
 For example: `Mistral-Nemo-Instruct-2407-Q8_0.gguf`
 
@@ -534,7 +577,7 @@ Write your paths. The `mmproj` line must be empty. In this mode images are ignor
 
 ---
 
-8. Qwen3-4b-Z-Engineer-V2 (**not vision**)
+9. Qwen3-4b-Z-Engineer-V2 (**not vision**)
 - https://huggingface.co/BennyDaBall/qwen3-4b-Z-Image-Engineer
 For example: `Qwen3-4b-Z-Engineer-V2.gguf`
 
