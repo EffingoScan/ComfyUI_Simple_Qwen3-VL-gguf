@@ -66,11 +66,23 @@ def main(config_dict=None):
 
             mmproj_kwargs = {
                 "clip_model_path": mmproj_path,
-                "force_reasoning": False,
                 "verbose": False,
             }
 
-            if chat_handler_type == "qwen3":
+            if chat_handler_type == "qwen35":
+                try:
+                    from llama_cpp.llama_chat_format import Qwen35ChatHandler
+                except ImportError:
+                    print(json.dumps({
+                        "status": "error",
+                        "message": "You have an outdated version of the llama-cpp-python library. Qwen3.5 requires version v0.3.30 or higher.",
+                    }, ensure_ascii=True))
+                    sys.exit(1)
+                mmproj_kwargs["image_max_tokens"] = config.get("image_max_tokens", 4096) 
+                mmproj_kwargs["enable_thinking"] = config.get("enable_thinking", False) 
+                mmproj_kwargs["add_vision_id"] = config.get("add_vision_id", len(images) != 1) 
+                chat_handler = Qwen35ChatHandler(**mmproj_kwargs)
+            elif chat_handler_type == "qwen3":
                 try:
                     from llama_cpp.llama_chat_format import Qwen3VLChatHandler
                 except ImportError:
@@ -79,7 +91,8 @@ def main(config_dict=None):
                         "message": "You have an outdated version of the llama-cpp-python library. Qwen3 requires version v0.3.17 or higher.",
                     }, ensure_ascii=True))
                     sys.exit(1)
-                mmproj_kwargs["image_max_tokens"] = config.get("image_max_tokens", 4096)    
+                mmproj_kwargs["image_max_tokens"] = config.get("image_max_tokens", 4096)
+                mmproj_kwargs["force_reasoning"] = config.get("force_reasoning", False)
                 chat_handler = Qwen3VLChatHandler(**mmproj_kwargs)
             elif chat_handler_type == "qwen25":
                 from llama_cpp.llama_chat_format import Qwen25VLChatHandler
@@ -129,7 +142,7 @@ def main(config_dict=None):
 
         if chat_handler:
             llm_kwargs["chat_handler"] = chat_handler
-            llm_kwargs["image_min_tokens"] = 1024
+            llm_kwargs["image_min_tokens"] = config.get("image_min_tokens", 1024)  
             llm_kwargs["image_max_tokens"] = config.get("image_max_tokens", 4096)    
 
         llm = Llama(**llm_kwargs)
